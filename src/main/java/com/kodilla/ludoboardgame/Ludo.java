@@ -83,19 +83,28 @@ public class Ludo extends Application {
         button.setGraphic(new ImageView(dice6));
         button.setOnAction(event -> button.setGraphic(new ImageView(dice.diceThrow())));
 
+        Pawn pawn1 = new Pawn("Blue",1, dice, board);
+       // Pawn pawn2 = new Pawn("Blue",2, dice);
 
-        Pawn pawn1 = new Pawn("Blue",1, dice);
-        Pawn pawn2 = new Pawn("Blue",2, dice);
+        //CompPlayer comp1 =  new CompPlayer("Blue");
+
         board.getGridPane().add(pawn1.getPawn(),5,0,2,2);
-        board.getGridPane().add(pawn2.getPawn(),6,0,2,2);
+       // board.getGridPane().add(pawn2.getPawn(),6,0,2,2);
+       // board.getGridPane().add(comp1.getCompPawn(), 7, 7, 2, 2);
+       /* button.fire();
+        comp1.compMove();
+        button.fire();
+        comp1.compMove()*/;
         board.getGridPane().add(button, 0, 0, 2,2);
-
+        System.out.println(board.getRedPlayer().size());
+       // board.compMoveBoard();
 
         Scene scene = new Scene(board.getGridPane(), 1600, 900, Color.BLUEVIOLET);
 
         primaryStage.setTitle("Ludo - BoardGame");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
 
     }

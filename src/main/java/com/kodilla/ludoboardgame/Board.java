@@ -10,11 +10,12 @@ import java.util.List;
 
 public class Board {
     private  static List<BoardField> board = new ArrayList<>(44);
-    GridPane gridPane = new GridPane();
+    private List<CompPlayer> redPlayer = new ArrayList<>();
+    private GridPane gridPane = new GridPane();
     private Image image = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\ludo-board.jpg");
-    BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-    Background background = new Background(backgroundImage);
+    private BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+    private BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+    private Background background = new Background(backgroundImage);
 
     public GridPane setBoard () {
 
@@ -31,6 +32,7 @@ public class Board {
         gridPane.add(first, 0,0,2,2);
         gridPane.add(last,20,10,2,2);
        createFields();
+       red();
        return gridPane;
             }
     public List<BoardField> createFields() {
@@ -82,11 +84,29 @@ public class Board {
         return board;
     }
 
+    public List<CompPlayer> red () {
+        CompPlayer red1 = new CompPlayer("Blue");
+        CompPlayer red2 = new CompPlayer("Blue");
+        gridPane.add(red1.getCompPawn(), 14, 0, 2, 2);
+        gridPane.add(red2.getCompPawn(), 14, 1, 2, 2);
+        redPlayer.add(red1);
+        redPlayer.add(red2);
+        return redPlayer;
+    }
+
+    public void compMoveBoard () {
+        redPlayer.get(0).compMove();
+    }
+
     public GridPane getGridPane() {
         return gridPane;
     }
 
     public  static List<BoardField> getBoard() {
         return board;
+    }
+
+    public List<CompPlayer> getRedPlayer() {
+        return redPlayer;
     }
 }

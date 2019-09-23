@@ -19,7 +19,7 @@ public class Dice {
     Random random = new Random();
 
     public Image diceThrow () {
-        if(diceIsThrow==false || isHome) {
+        if(!diceIsThrow || isHome) {
         result = random.nextInt(6);
                 if (result == 0) {
                     diceIsThrow = true;
@@ -44,12 +44,11 @@ public class Dice {
                     return null;
                 }
             }
-
         return dice;
         }
 
 
-    public Image firstDiceThrow() {
+    public Image compDiceThrow() {
         int firstResult = random.nextInt(6);
         if (firstResult == 0) {
             dice = dice1;
@@ -84,4 +83,5 @@ public class Dice {
     public void setHome(boolean home) {
         isHome = home;
     }
+
 }

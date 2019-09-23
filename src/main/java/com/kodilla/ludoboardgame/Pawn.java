@@ -18,20 +18,24 @@ public class Pawn {
     private int where = 0;
     private boolean isHome = true;
     private Dice dice;
+    private Board board;
+    private CompPlayer compPlayer;
 
-    public Pawn (String color, int numb, Dice dice) {
+    public Pawn (String color, int numb, Dice dice, Board board) {
         if (color.equals("Blue")) {
             pawn.setGraphic(new ImageView(pawnBlue));
             pawn.setBorder(Border.EMPTY);
             pawn.setStyle("-fx-background-color: transparent");
             this.numb = numb;
             this.dice = dice;
+            this.board = board;
            pawn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     if (dice.getDiceIsThrow()) {
                         move();
                         dice.setDiceIsThrow(false);
+                        board.compMoveBoard();
                     }
                 }
             });
@@ -67,4 +71,6 @@ public class Pawn {
     public void setIsHome(boolean isHome) {
         this.isHome = isHome;
     }
+
+
 }

@@ -85,8 +85,8 @@ public class Board {
     }
 
     public List<CompPlayer> red () {
-        CompPlayer red1 = new CompPlayer("Blue");
-        CompPlayer red2 = new CompPlayer("Blue");
+        CompPlayer red1 = new CompPlayer("Red");
+        CompPlayer red2 = new CompPlayer("Red");
         gridPane.add(red1.getCompPawn(), 14, 0, 2, 2);
         gridPane.add(red2.getCompPawn(), 14, 1, 2, 2);
         redPlayer.add(red1);

@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 public class CompPlayer {
     private Dice compDice = new Dice();
     private Pawn compMovePawn;
-    private Image pawnBlue = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnRed.png", 50, 50, true, false);
+    private Image pawnRed = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnRed.png", 50, 50, true, false);
     private Button compPawn = new Button();
     private GridPane gridPane = new GridPane();
     private int compNumb;
@@ -17,8 +17,8 @@ public class CompPlayer {
     private boolean compIsHome = true;
 
     public CompPlayer(String color) {
-        if (color.equals("Blue")) {
-            compPawn.setGraphic(new ImageView(pawnBlue));
+        if (color.equals("Red")) {
+            compPawn.setGraphic(new ImageView(pawnRed));
             compPawn.setBorder(Border.EMPTY);
             compPawn.setStyle("-fx-background-color: transparent");
         }

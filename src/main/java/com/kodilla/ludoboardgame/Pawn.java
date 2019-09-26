@@ -29,16 +29,13 @@ public class Pawn {
             this.numb = numb;
             this.dice = dice;
             this.board = board;
-           pawn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    if (dice.getDiceIsThrow()) {
-                        move();
-                        dice.setDiceIsThrow(false);
-                        board.compMoveBoard();
-                    }
-                }
-            });
+           pawn.setOnAction(event -> {
+               if (dice.getDiceIsThrow()) {
+                   move();
+                   dice.setDiceIsThrow(false);
+                   board.compMoveBoard();
+               }
+           });
         }
     }
 

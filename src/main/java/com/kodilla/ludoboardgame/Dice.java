@@ -1,6 +1,8 @@
 package com.kodilla.ludoboardgame;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.Random;
 
@@ -14,7 +16,8 @@ public class Dice {
     private int result;
     private boolean diceIsThrow = false;
     private boolean isHome = true;
-    Image dice;
+    private Image dice;
+    private Button button = new Button();
 
     Random random = new Random();
 
@@ -47,20 +50,23 @@ public class Dice {
         return dice;
         }
 
+        public void showDice () { // how can i show dice when is comp turn?
+            button.setGraphic(new ImageView(dice));
+        }
 
-    public Image compDiceThrow() {
-        int firstResult = random.nextInt(6);
-        if (firstResult == 0) {
+    public Image compDiceThrow() { // is necessary...?
+        result = random.nextInt(6);
+        if (result == 0) {
             dice = dice1;
-        } else if (firstResult == 1) {
+        } else if (result == 1) {
             dice = dice2;
-        } else if (firstResult == 2) {
+        } else if (result == 2) {
             dice = dice3;
-        } else if (firstResult == 3) {
+        } else if (result == 3) {
             dice = dice4;
-        } else if (firstResult == 4) {
+        } else if (result == 4) {
             dice = dice5;
-        } else if (firstResult == 5) {
+        } else if (result == 5) {
             dice = dice6;
         } else {
             System.out.println("BUG");

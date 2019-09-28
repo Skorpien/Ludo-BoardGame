@@ -13,6 +13,8 @@ public class Pawn {
 
     private Image pawnBlue = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawn.png", 50, 50, true, false);
     private Image pawnRed = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnRed.png", 50, 50, true, false);
+    private Image pawnGreen = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnGreen.png", 50, 50, true, false);
+    private Image pawnYellow = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnYellow.png", 50, 50, true, false);
     private Button pawn = new Button();
     private GridPane gridPane = new GridPane();
     private int where;
@@ -27,8 +29,8 @@ public class Pawn {
             this.isHome = isHome;
             this.where = where;
             createBlueFields();
-          //  this.dice = dice;
-           // this.board = board;
+            //  this.dice = dice;
+            // this.board = board;
     /*       pawn.setOnAction(event -> {
                if (dice.getDiceIsThrow()) {
                    move();
@@ -40,6 +42,22 @@ public class Pawn {
             pawn.setGraphic(new ImageView(pawnRed));
             pawn.setBorder(Border.EMPTY);
             pawn.setStyle("-fx-background-color: transparent");
+            this.isHome = isHome;
+            this.where = where;
+            //createBlueFields();
+        } else if (color.equals("Green")) {
+            pawn.setGraphic(new ImageView(pawnGreen));
+            pawn.setBorder(Border.EMPTY);
+            pawn.setStyle("-fx-background-color: transparent");
+            this.isHome = isHome;
+            this.where = where;
+            //createBlueFields();
+        } else if (color.equals("Yellow")) {
+            pawn.setGraphic(new ImageView(pawnYellow));
+            pawn.setBorder(Border.EMPTY);
+            pawn.setStyle("-fx-background-color: transparent");
+            this.isHome = isHome;
+            this.where = where;
             //createBlueFields();
         }
     }

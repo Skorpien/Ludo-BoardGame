@@ -6,7 +6,9 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Pawn {
@@ -25,6 +27,7 @@ public class Pawn {
     private int startField;
     private int traveledFields;
 
+
     public Pawn (String color, boolean isHome, int where, int homeColumn, int homeRow, int traveledFields) {
         if (color.equals("Blue")) {
             pawn.setGraphic(new ImageView(pawnBlue));
@@ -35,8 +38,9 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-          //  this.startField = startField;
+            startField = where;
             this.traveledFields = traveledFields;
+
             //  this.dice = dice;
             // this.board = board;
     /*       pawn.setOnAction(event -> {
@@ -55,7 +59,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-          //  this.startField = startField;
+            startField = where;
             this.traveledFields = traveledFields;
         } else if (color.equals("Green")) {
             pawn.setGraphic(new ImageView(pawnGreen));
@@ -66,7 +70,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-           // this.startField = startField;
+            startField = where;
             this.traveledFields = traveledFields;
         } else if (color.equals("Yellow")) {
             pawn.setGraphic(new ImageView(pawnYellow));
@@ -77,7 +81,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-            //this.startField = startField;
+            startField = where;
             this.traveledFields = traveledFields;
         }
     }
@@ -101,6 +105,9 @@ public class Pawn {
         this.isHome = isHome;
     }
 
+    public int getStartField() {
+        return startField;
+    }
 
     public int getWhere() {
         return this.where;

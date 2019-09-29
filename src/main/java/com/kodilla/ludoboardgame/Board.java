@@ -6,7 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Board {
     //private  static List<BoardField> blueFields = new ArrayList<>(44);
@@ -20,6 +22,11 @@ public class Board {
     private BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
     private Background background = new Background(backgroundImage);
     private List<BoardField> blueFields = new ArrayList<>(40);
+    private Map<Integer, BoardField> blueFinish = new HashMap<Integer, BoardField>();
+    private Map<Integer, BoardField> redFinish = new HashMap<Integer, BoardField>();
+    private Map<Integer, BoardField> greenFinish = new HashMap<Integer, BoardField>();
+    private Map<Integer, BoardField> yellowFinish = new HashMap<Integer, BoardField>();
+
 
     public void setBoard () {
 
@@ -56,6 +63,12 @@ public class Board {
         bluePlayer.add(blue2);
         bluePlayer.add(blue3);
         bluePlayer.add(blue4);
+
+
+        blueFinish.put(0, new BoardField(5,6, null));
+        blueFinish.put(1, new BoardField(5,7, null));
+        blueFinish.put(2, new BoardField(5,8, null));
+        blueFinish.put(3, new BoardField(5,9, null));
     }
 
     public void red () {
@@ -71,6 +84,11 @@ public class Board {
         redPlayer.add(red2);
         redPlayer.add(red3);
         redPlayer.add(red4);
+
+        redFinish.put(0, new BoardField(1,10, null));
+        redFinish.put(1, new BoardField(2,10, null));
+        redFinish.put(2, new BoardField(3,10, null));
+        redFinish.put(3, new BoardField(4,10, null));
     }
     public void green () {
         Pawn green1 = new Pawn("Green", true, 20, 14, 9,0);
@@ -85,6 +103,11 @@ public class Board {
         greenPlayer.add(green2);
         greenPlayer.add(green3);
         greenPlayer.add(green4);
+
+        greenFinish.put(0, new BoardField(5,14, null));
+        greenFinish.put(1, new BoardField(5,13, null));
+        greenFinish.put(2, new BoardField(5,12, null));
+        greenFinish.put(3, new BoardField(5,11, null));
     }
     public void yellow () {
         Pawn yellow1 = new Pawn("Yellow", true, 30, 5, 9, 0);
@@ -99,6 +122,11 @@ public class Board {
         yellowPlayer.add(yellow2);
         yellowPlayer.add(yellow3);
         yellowPlayer.add(yellow4);
+
+        yellowFinish.put(0, new BoardField(1,9, null));
+        yellowFinish.put(1, new BoardField(2,8, null));
+        yellowFinish.put(2, new BoardField(3,7, null));
+        yellowFinish.put(3, new BoardField(4,6, null));
     }
 
     public void createBlueFields() {
@@ -176,5 +204,21 @@ public class Board {
     }
     public List<BoardField> getBlueFields() {
         return blueFields;
+    }
+
+    public Map<Integer, BoardField> getBlueFinish() {
+        return blueFinish;
+    }
+
+    public Map<Integer, BoardField> getRedFinish() {
+        return redFinish;
+    }
+
+    public Map<Integer, BoardField> getGreenFinish() {
+        return greenFinish;
+    }
+
+    public Map<Integer, BoardField> getYellowFinish() {
+        return yellowFinish;
     }
 }

@@ -19,16 +19,24 @@ public class Pawn {
     private GridPane gridPane = new GridPane();
     private int where;
     private boolean isHome;
-    private  static List<BoardField> blueFields = new ArrayList<>(44);
+    private String color;
+    private int homeColumn;
+    private int homeRow;
+    private int startField;
+    private int traveledFields;
 
-    public Pawn (String color, boolean isHome, int where) {
+    public Pawn (String color, boolean isHome, int where, int homeColumn, int homeRow, int traveledFields) {
         if (color.equals("Blue")) {
             pawn.setGraphic(new ImageView(pawnBlue));
             pawn.setBorder(Border.EMPTY);
             pawn.setStyle("-fx-background-color: transparent");
             this.isHome = isHome;
             this.where = where;
-            createBlueFields();
+            this.color = color;
+            this.homeColumn = homeColumn;
+            this.homeRow = homeRow;
+          //  this.startField = startField;
+            this.traveledFields = traveledFields;
             //  this.dice = dice;
             // this.board = board;
     /*       pawn.setOnAction(event -> {
@@ -44,112 +52,81 @@ public class Pawn {
             pawn.setStyle("-fx-background-color: transparent");
             this.isHome = isHome;
             this.where = where;
-            //createBlueFields();
+            this.color = color;
+            this.homeColumn = homeColumn;
+            this.homeRow = homeRow;
+          //  this.startField = startField;
+            this.traveledFields = traveledFields;
         } else if (color.equals("Green")) {
             pawn.setGraphic(new ImageView(pawnGreen));
             pawn.setBorder(Border.EMPTY);
             pawn.setStyle("-fx-background-color: transparent");
             this.isHome = isHome;
             this.where = where;
-            //createBlueFields();
+            this.color = color;
+            this.homeColumn = homeColumn;
+            this.homeRow = homeRow;
+           // this.startField = startField;
+            this.traveledFields = traveledFields;
         } else if (color.equals("Yellow")) {
             pawn.setGraphic(new ImageView(pawnYellow));
             pawn.setBorder(Border.EMPTY);
             pawn.setStyle("-fx-background-color: transparent");
             this.isHome = isHome;
             this.where = where;
-            //createBlueFields();
+            this.color = color;
+            this.homeColumn = homeColumn;
+            this.homeRow = homeRow;
+            //this.startField = startField;
+            this.traveledFields = traveledFields;
         }
     }
 
-    public void createBlueFields() {
-        blueFields.add(new BoardField(4,5));
-        blueFields.add(new BoardField(4,6));
-        blueFields.add(new BoardField(4,7));
-        blueFields.add(new BoardField(4,8));
-        blueFields.add(new BoardField(4,9));
-        blueFields.add(new BoardField(3,9));
-        blueFields.add(new BoardField(2,9));
-        blueFields.add(new BoardField(1,9));
-        blueFields.add(new BoardField(0,9));
-        blueFields.add(new BoardField(0,10));
-        blueFields.add(new BoardField(0,11));
-        blueFields.add(new BoardField(1,11));
-        blueFields.add(new BoardField(2,11));
-        blueFields.add(new BoardField(3,11));
-        blueFields.add(new BoardField(4,11));
-        blueFields.add(new BoardField(4,12));
-        blueFields.add(new BoardField(4,13));
-        blueFields.add(new BoardField(4,14));
-        blueFields.add(new BoardField(4,15));
-        blueFields.add(new BoardField(5,15));
-        blueFields.add(new BoardField(6,15));
-        blueFields.add(new BoardField(6,14));
-        blueFields.add(new BoardField(6,13));
-        blueFields.add(new BoardField(6,12));
-        blueFields.add(new BoardField(6,11));
-        blueFields.add(new BoardField(7,11));
-        blueFields.add(new BoardField(8,11));
-        blueFields.add(new BoardField(9,11));
-        blueFields.add(new BoardField(10,11));
-        blueFields.add(new BoardField(10,10));
-        blueFields.add(new BoardField(10,9));
-        blueFields.add(new BoardField(9,9));
-        blueFields.add(new BoardField(8,9));
-        blueFields.add(new BoardField(7,9));
-        blueFields.add(new BoardField(6,9));
-        blueFields.add(new BoardField(6,8));
-        blueFields.add(new BoardField(6,7));
-        blueFields.add(new BoardField(6,6));
-        blueFields.add(new BoardField(6,5));
-        blueFields.add(new BoardField(5,5));
-        blueFields.add(new BoardField(5,6));
-        blueFields.add(new BoardField(5,7));
-        blueFields.add(new BoardField(5,8));
-        blueFields.add(new BoardField(5,9));
-
-    }
 
 
     public Button getPawn() {
-        return pawn;
+        return this.pawn;
     }
 
-/*    public void move() {
-        if (isHome) {
-            if (dice.getResult() == 5) {
-                gridPane.setRowIndex(this.getPawn(), Board.getBoard().get(0).getRow());
-                gridPane.setColumnIndex(this.getPawn(), Board.getBoard().get(0).getColumn());
-                dice.setHome(false);
-                isHome = false;
-            }
-        } else {
-            where+=dice.getResult()+1;
-            if (where>=Board.getBoard().size()) {
-                where-=dice.getResult()+1;
-            } else
-            gridPane.setRowIndex(this.getPawn(), Board.getBoard().get(where).getRow());
-            gridPane.setColumnIndex(this.getPawn(), Board.getBoard().get(where).getColumn());
-        }
-    }*/
+
+    public String getColor() {
+        return this.color;
+    }
 
     public boolean getIsHome() {
-        return isHome;
+        return this.isHome;
     }
 
     public void setIsHome(boolean isHome) {
         this.isHome = isHome;
     }
 
-    public List<BoardField> getBlueFields() {
-        return blueFields;
-    }
 
     public int getWhere() {
-        return where;
+        return this.where;
+    }
+
+    public int getHomeColumn() {
+        return this.homeColumn;
+    }
+
+    public void setTraveledFields(int traveledFields) {
+        this.traveledFields = traveledFields;
+    }
+
+    public int getTraveledFields() {
+        return traveledFields;
+    }
+
+    public int getHomeRow() {
+        return this.homeRow;
     }
 
     public void setWhere(int where) {
         this.where = where;
+    }
+
+    public void setHome(boolean home) {
+        this.isHome = home;
     }
 }

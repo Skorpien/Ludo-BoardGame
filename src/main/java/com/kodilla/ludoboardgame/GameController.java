@@ -50,7 +50,9 @@ public class GameController {
 
     public void redPlay() {
         boolean redWasMove = false;
-        dice.diceThrow();
+        dice.compDiceThrow();
+        dice.showDice();
+        System.out.println("Red: " + dice.getResult());
         for (Pawn pawn : board.getRedPlayer()
         ) {
             if (dice.getResult() == 5 && pawn.getIsHome()) {
@@ -72,7 +74,8 @@ public class GameController {
 
     public void greenPlay() {
         boolean wasMove = false;
-        dice.diceThrow();
+        dice.compDiceThrow();
+        System.out.println("Green: " + dice.getResult());
         for (Pawn pawn : board.getGreenPlayer()
         ) {
             if (dice.getResult() == 5 && pawn.getIsHome()) {
@@ -94,7 +97,8 @@ public class GameController {
 
     public void yellowPlay () {
         boolean wasMove = false;
-        dice.diceThrow();
+        dice.compDiceThrow();
+        System.out.println("Yellow: " + dice.getResult());
         for (Pawn pawn : board.getYellowPlayer()
         ) {
             if (dice.getResult() == 5 && pawn.getIsHome()) {
@@ -117,19 +121,64 @@ public class GameController {
         public void move (Pawn pawn){
             if (pawn.getIsHome()) {
                 if (dice.getResult() == 5) {
-                    GridPane.setRowIndex(pawn.getPawn(), pawn.getBlueFields().get(0).getRow());
-                    GridPane.setColumnIndex(pawn.getPawn(), pawn.getBlueFields().get(0).getColumn());
+                    if (pawn.getColor().equals("Blue")) {
+                        GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(0).getRow());
+                        GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(0).getColumn());
+                        beating(pawn, 0);
+                        board.getBlueFields().get(0).setPawn(pawn);
+                    } else if (pawn.getColor().equals("Red")) {
+                        GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(10).getRow());
+                        GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(10).getColumn());
+                        beating(pawn, 10);
+                        board.getBlueFields().get(10).setPawn(pawn);
+                    } else if (pawn.getColor().equals("Green")) {
+                        GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(20).getRow());
+                        GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(20).getColumn());
+                        beating(pawn, 20);
+                        board.getBlueFields().get(20).setPawn(pawn);
+                    } else if (pawn.getColor().equals("Yellow")) {
+                        GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(30).getRow());
+                        GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(30).getColumn());
+                        beating(pawn, 30);
+                        board.getBlueFields().get(30).setPawn(pawn);
+
+                    }
                     dice.setHome(false);
                     pawn.setIsHome(false);
                 }
             } else {
+                int releasedField = pawn.getWhere();
                 pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
-                if (pawn.getWhere() >= pawn.getBlueFields().size()) {
-                    pawn.setWhere(pawn.getWhere() - dice.getResult() + 1);
+                if (pawn.getWhere() >= board.getBlueFields().size()) {
+                    pawn.setWhere(pawn.getWhere() - board.getBlueFields().size());
+                    beating(pawn, pawn.getWhere());
+                    board.getBlueFields().get(pawn.getWhere()).setPawn(pawn);
+                    board.getBlueFields().get(releasedField).setPawn(null);
+                    pawn.setTraveledFields(pawn.getTraveledFields()+dice.getResult()+1);
                 } else
-                    GridPane.setRowIndex(pawn.getPawn(), pawn.getBlueFields().get(pawn.getWhere()).getRow());
-                GridPane.setColumnIndex(pawn.getPawn(), pawn.getBlueFields().get(pawn.getWhere()).getColumn());
+                    beating(pawn, pawn.getWhere());
+                    GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getRow());
+                    GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getColumn());
+                    board.getBlueFields().get(pawn.getWhere()).setPawn(pawn);
+                    board.getBlueFields().get(releasedField).setPawn(null);
+                    pawn.setTraveledFields(pawn.getTraveledFields()+dice.getResult()+1);
+            }
+        }
+
+        public void beating (Pawn pawn, int where) {
+        if (board.getBlueFields().get(where).getPawn() != null) {
+                GridPane.setRowIndex(board.getBlueFields().get(where).getPawn().getPawn(), board.getBlueFields().get(where).getPawn().getHomeRow());
+                GridPane.setColumnIndex(board.getBlueFields().get(where).getPawn().getPawn(), board.getBlueFields().get(where).getPawn().getHomeColumn());
+                board.getBlueFields().get(where).getPawn().setWhere(0);
+                board.getBlueFields().get(where).getPawn().setTraveledFields(0);
+                board.getBlueFields().get(where).getPawn().setHome(true);
             }
         }
 
     }
+
+/*
+     if (pawn.getWhere() >= pawn.getBlueFields().size()) {  //when go to base
+             pawn.setWhere(pawn.getWhere() - dice.getResult() + 1);*/
+
+//if (pawn.getColor().equals(board.getBlueFields().get(where).getPawn().getColor())) //func when the same color

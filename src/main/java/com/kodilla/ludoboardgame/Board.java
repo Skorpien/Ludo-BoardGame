@@ -19,6 +19,7 @@ public class Board {
     private BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
     private BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
     private Background background = new Background(backgroundImage);
+    private List<BoardField> blueFields = new ArrayList<>(40);
 
     public void setBoard () {
 
@@ -34,6 +35,7 @@ public class Board {
         Button last = new Button();
         gridPane.add(first, 0,0,2,2);
         gridPane.add(last,20,10,2,2);
+        createBlueFields();
        blue();
        red();
        green();
@@ -42,10 +44,10 @@ public class Board {
 
 
     public void blue () {
-        Pawn blue1 = new Pawn("Blue", true, 0);
-        Pawn blue2 = new Pawn("Blue", true, 0);
-        Pawn blue3 = new Pawn("Blue", true, 0);
-        Pawn blue4 = new Pawn("Blue", true, 0);
+        Pawn blue1 = new Pawn("Blue", true, 0, 5, 0, 0);
+        Pawn blue2 = new Pawn("Blue", true, 0, 5, 1, 0);
+        Pawn blue3 = new Pawn("Blue", true, 0, 6, 0, 0);
+        Pawn blue4 = new Pawn("Blue", true, 0, 6, 1, 0);
         gridPane.add(blue1.getPawn(), 5, 0, 2, 2);
         gridPane.add(blue2.getPawn(), 5, 1, 2, 2);
         gridPane.add(blue3.getPawn(), 6, 0, 2, 2);
@@ -57,10 +59,10 @@ public class Board {
     }
 
     public void red () {
-        Pawn red1 = new Pawn("Red", true, 0);
-        Pawn red2 = new Pawn("Red", true, 0);
-        Pawn red3 = new Pawn("Red", true, 0);
-        Pawn red4 = new Pawn("Red", true, 0);
+        Pawn red1 = new Pawn("Red", true, 10, 14, 0, 0);
+        Pawn red2 = new Pawn("Red", true, 10, 14, 1, 0);
+        Pawn red3 = new Pawn("Red", true, 10, 15, 0, 0);
+        Pawn red4 = new Pawn("Red", true, 10, 15, 1, 0);
         gridPane.add(red1.getPawn(), 14, 0, 2, 2);
         gridPane.add(red2.getPawn(), 14, 1, 2, 2);
         gridPane.add(red3.getPawn(), 15, 0, 2, 2);
@@ -71,10 +73,10 @@ public class Board {
         redPlayer.add(red4);
     }
     public void green () {
-        Pawn green1 = new Pawn("Green", true, 0);
-        Pawn green2 = new Pawn("Green", true, 0);
-        Pawn green3 = new Pawn("Green", true, 0);
-        Pawn green4 = new Pawn("Green", true, 0);
+        Pawn green1 = new Pawn("Green", true, 20, 14, 9,0);
+        Pawn green2 = new Pawn("Green", true, 20, 14, 10, 0);
+        Pawn green3 = new Pawn("Green", true, 20, 15, 9, 0);
+        Pawn green4 = new Pawn("Green", true, 20, 15, 10, 0);
         gridPane.add(green1.getPawn(), 14, 9, 2, 2);
         gridPane.add(green2.getPawn(), 14, 10, 2, 2);
         gridPane.add(green3.getPawn(), 15, 9, 2, 2);
@@ -85,10 +87,10 @@ public class Board {
         greenPlayer.add(green4);
     }
     public void yellow () {
-        Pawn yellow1 = new Pawn("Yellow", true, 0);
-        Pawn yellow2 = new Pawn("Yellow", true, 0);
-        Pawn yellow3 = new Pawn("Yellow", true, 0);
-        Pawn yellow4 = new Pawn("Yellow", true, 0);
+        Pawn yellow1 = new Pawn("Yellow", true, 30, 5, 9, 0);
+        Pawn yellow2 = new Pawn("Yellow", true, 30, 5, 10, 0);
+        Pawn yellow3 = new Pawn("Yellow", true, 30, 6, 9, 0);
+        Pawn yellow4 = new Pawn("Yellow", true, 30, 6, 10, 0);
         gridPane.add(yellow1.getPawn(), 5, 9, 2, 2);
         gridPane.add(yellow2.getPawn(), 5, 10, 2, 2);
         gridPane.add(yellow3.getPawn(), 6, 9, 2, 2);
@@ -98,6 +100,55 @@ public class Board {
         yellowPlayer.add(yellow3);
         yellowPlayer.add(yellow4);
     }
+
+    public void createBlueFields() {
+        blueFields.add(new BoardField(4,5, null));
+        blueFields.add(new BoardField(4,6, null));
+        blueFields.add(new BoardField(4,7, null));
+        blueFields.add(new BoardField(4,8, null));
+        blueFields.add(new BoardField(4,9, null));
+        blueFields.add(new BoardField(3,9, null));
+        blueFields.add(new BoardField(2,9, null));
+        blueFields.add(new BoardField(1,9, null));
+        blueFields.add(new BoardField(0,9, null));
+        blueFields.add(new BoardField(0,10, null));
+        blueFields.add(new BoardField(0,11, null));
+        blueFields.add(new BoardField(1,11, null));
+        blueFields.add(new BoardField(2,11, null));
+        blueFields.add(new BoardField(3,11, null));
+        blueFields.add(new BoardField(4,11, null));
+        blueFields.add(new BoardField(4,12, null));
+        blueFields.add(new BoardField(4,13, null));
+        blueFields.add(new BoardField(4,14, null));
+        blueFields.add(new BoardField(4,15, null));
+        blueFields.add(new BoardField(5,15, null));
+        blueFields.add(new BoardField(6,15, null));
+        blueFields.add(new BoardField(6,14, null));
+        blueFields.add(new BoardField(6,13, null));
+        blueFields.add(new BoardField(6,12, null));
+        blueFields.add(new BoardField(6,11, null));
+        blueFields.add(new BoardField(7,11, null));
+        blueFields.add(new BoardField(8,11, null));
+        blueFields.add(new BoardField(9,11, null));
+        blueFields.add(new BoardField(10,11, null));
+        blueFields.add(new BoardField(10,10, null));
+        blueFields.add(new BoardField(10,9, null));
+        blueFields.add(new BoardField(9,9, null));
+        blueFields.add(new BoardField(8,9, null));
+        blueFields.add(new BoardField(7,9, null));
+        blueFields.add(new BoardField(6,9, null));
+        blueFields.add(new BoardField(6,8, null));
+        blueFields.add(new BoardField(6,7, null));
+        blueFields.add(new BoardField(6,6, null));
+        blueFields.add(new BoardField(6,5, null));
+        blueFields.add(new BoardField(5,5,null));
+     /*   blueFields.add(new BoardField(5,6));
+        blueFields.add(new BoardField(5,7));
+        blueFields.add(new BoardField(5,8));
+        blueFields.add(new BoardField(5,9));*/
+
+    }
+
 
    /* public void compMoveBoard () {
         redPlayer.get(0).compMove();
@@ -122,5 +173,8 @@ public class Board {
     }
     public List<Pawn> getYellowPlayer() {
         return yellowPlayer;
+    }
+    public List<BoardField> getBlueFields() {
+        return blueFields;
     }
 }

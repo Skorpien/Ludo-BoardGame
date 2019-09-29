@@ -1,12 +1,14 @@
 package com.kodilla.ludoboardgame;
 
 public class BoardField {
-    int row;
-    int column;
+    private int row;
+    private int column;
+    private Pawn pawn;
 
-    public BoardField (int row, int column) {
+    public BoardField (int row, int column, Pawn pawn) {
         this.row = row;
         this.column = column;
+        this.pawn = pawn;
     }
 
     public int getRow() {
@@ -15,5 +17,13 @@ public class BoardField {
 
     public int getColumn() {
         return column;
+    }
+
+    public Pawn getPawn() {
+        return pawn;
+    }
+
+    public void setPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
 }

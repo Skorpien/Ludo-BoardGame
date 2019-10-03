@@ -40,16 +40,16 @@ public class GameController {
                         } else {
                             move(board.getBluePlayer().get(finalI));
                             dice.setDiceIsThrow(false);
-                          //  play();
+                           play();
                         }
-                    } else if (whereNow <= 44){
+                    } else if (whereNow <= 43){
                         whereNow = whereNow - 40;
                         if (board.getBlueFinish().get(whereNow).getPawn().getColor().equals("Blue")) {
                             board.getBluePlayer().get(finalI).getPawn().setDisable(true);
                         } else {
                             move(board.getBluePlayer().get(finalI));
                             dice.setDiceIsThrow(false);
-                           // play();
+                           play();
                         }
 
                     } else {
@@ -64,8 +64,8 @@ public class GameController {
     public void play() {
 
         redPlay();
-        greenPlay(); //some bug
-        yellowPlay();
+      //  greenPlay(); //some bug
+      //  yellowPlay();
         for (Pawn pawn:
              board.getBluePlayer()) {
                     pawn.getPawn().setDisable(false);
@@ -76,32 +76,28 @@ public class GameController {
     public void redPlay() {
         boolean wasMove = false;
         dice.compDiceThrow();
-        dice.showDice();
+       // dice.showDice();
         System.out.println("Red: " + dice.getResult());
         for (Pawn pawn : board.getRedPlayer()
         ) {
-            if (dice.getResult() == 5 && pawn.getIsHome() && board.getBlueFields().get(pawn.getHomeRow()).getPawn() == null) {
+            if ((dice.getResult() == 5) && pawn.getIsHome() && !board.getBlueFields().get(pawn.getStartField()).getPawn().getColor().equals("Red")) {
+                System.out.println("red first if");
                 move(pawn);
                 wasMove = true;
                 break;
-            } else if (dice.getResult() == 5 && pawn.getIsHome() && !board.getBlueFields().get(pawn.getHomeRow()).getPawn().getColor().equals("Red")) {
-                move(pawn);
-                wasMove = true;
-                break;
-            } else {
-                ;
+                }
             }
-        }
-        if (!wasMove) {
-            for (Pawn pawn : board.getRedPlayer()
-            ) {
-                if (pawn.getWhere() < 41) {
-                    move(pawn);
-                    break;
+            if (!wasMove) {
+                for (Pawn pawn : board.getRedPlayer()
+                ) {
+                    if (/*pawn.getTraveledFields() + dice.getResult() < 40 && */!pawn.getIsHome()) {
+                        System.out.println("red second if");
+                        move(pawn);
+                        break;
+                    }
                 }
             }
         }
-    }
 
     public void greenPlay() {
         boolean wasMove = false;
@@ -109,27 +105,21 @@ public class GameController {
         System.out.println("Green: " + dice.getResult());
         for (Pawn pawn : board.getGreenPlayer()
         ) {
-            if (dice.getResult() == 5 && pawn.getIsHome() && board.getBlueFields().get(pawn.getHomeRow()).getPawn() == null) {
+            if (dice.getResult() == 5 && pawn.getIsHome() && !board.getBlueFields().get(pawn.getWhere()).getPawn().getColor().equals(pawn.getColor())) {
                 move(pawn);
                 wasMove = true;
                 break;
-            } else if (dice.getResult() == 5 && pawn.getIsHome() && !board.getBlueFields().get(pawn.getHomeRow()).getPawn().getColor().equals(pawn.getColor())) {
-                move(pawn);
-                wasMove = true;
-                break;
-            } else {
-                ;
             }
         }
-        if (!wasMove) {
-            for (Pawn pawn : board.getGreenPlayer()
-            ) {
-                if (pawn.getWhere() < 41) {
-                    move(pawn);
-                    break;
+            if (!wasMove) {
+                for (Pawn pawn : board.getYellowPlayer()
+                ) {
+                    if (/*pawn.getTraveledFields() + dice.getResult() < 40 && */!pawn.getIsHome()) {
+                        move(pawn);
+                        break;
+                    }
                 }
             }
-        }
     }
 
     public void yellowPlay() {
@@ -138,38 +128,31 @@ public class GameController {
         System.out.println("Yellow: " + dice.getResult());
         for (Pawn pawn : board.getYellowPlayer()
         ) {
-            if (dice.getResult() == 5 && pawn.getIsHome() && board.getBlueFields().get(pawn.getHomeRow()).getPawn() == null) {
+            if (dice.getResult() == 5 && pawn.getIsHome() && !board.getBlueFields().get(pawn.getHomeRow()).getPawn().getColor().equals(pawn.getColor())) {
                 move(pawn);
                 wasMove = true;
-                break;
-            } else if (dice.getResult() == 5 && pawn.getIsHome() && !board.getBlueFields().get(pawn.getHomeRow()).getPawn().getColor().equals(pawn.getColor())) {
-                move(pawn);
-                wasMove = true;
-                break;
-            } else {
                 break;
             }
         }
         if (!wasMove) {
             for (Pawn pawn : board.getYellowPlayer()
             ) {
-                if (pawn.getTraveledFields() + dice.getResult() < 40) {
+                if (/*pawn.getTraveledFields() + dice.getResult() < 40 && */!pawn.getIsHome()) {
                     move(pawn);
                     break;
                 }
-                if (pawn.getTraveledFields() + dice.getResult() > 39 && pawn.getTraveledFields() + dice.getResult() < 43) {
+             /*   if (pawn.getTraveledFields() + dice.getResult() > 39 && pawn.getTraveledFields() + dice.getResult() < 45) {
                     int rest = pawn.getTraveledFields() - 40;
                     if (dice.getResult() + 1 < board.getYellowFinish().size()) {
 
-                    }
+                    }*/
                 }
             }
-        }
     }
 
     public void move(Pawn pawn) {
         if (pawn.getIsHome()) {
-            if (dice.getResult() == 5) {
+            if (dice.getResult() == 5 && !board.getBlueFields().get(pawn.getStartField()).getPawn().getColor().equals(pawn.getColor())) {
                 switch (pawn.getColor()) {
                     case "Blue":
                         if (board.getBlueFields().get(0).getPawn().getColor().equals("none")) {
@@ -183,6 +166,7 @@ public class GameController {
                         }
                         break;
                     case "Red":
+
                         GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(10).getRow());
                         GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(10).getColumn());
                         beating(pawn, 10);
@@ -208,31 +192,33 @@ public class GameController {
         } else {
             int whereNow = pawn.getWhere() + dice.getResult() + 1;
             int releasedField = pawn.getWhere();
+            boolean noChange = true;
             pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() +1);
             if (whereNow >= (board.getBlueFields().size())) {
-                pawn.setWhere(whereNow - (board.getBlueFields().size()));
+                pawn.setWhere(whereNow - board.getBlueFields().size());
+                noChange = false;
               //  whereNow = pawn.getWhere();
             }
             if (pawn.getTraveledFields() <= 39) {
                 System.out.println("whereNow in move: " + whereNow);
-                if (!board.getBlueFields().get(whereNow).getPawn().getColor().equals(pawn.getColor())) {
-                    pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
-                   // pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() + 1);
+                    if (!board.getBlueFields().get(pawn.getWhere() + (dice.getResult() + 1)).getPawn().getColor().equals(pawn.getColor()) && noChange) {
+                        pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
+                        // pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() + 1);
               /*      if (pawn.getWhere() >= board.getBlueFields().size()) {
                         pawn.setWhere(pawn.getWhere() - board.getBlueFields().size());*/
                         //  beating(pawn, pawn.getWhere());
                         //  board.getBlueFields().get(pawn.getWhere()).setPawn(pawn);
                         //   board.getBlueFields().get(releasedField).setPawn(null);
                         //  pawn.setTraveledFields(pawn.getTraveledFields()+dice.getResult()+1);
-                   // }
-                    if (beating(pawn, pawn.getWhere()) || board.getBlueFields().get(pawn.getWhere()).getPawn().getColor().equals("none")) {
-                        GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getRow());
-                        GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getColumn());
-                        board.getBlueFields().get(pawn.getWhere()).setPawn(pawn);
-                        board.getBlueFields().get(releasedField).setPawn(new Pawn("none"));
-                        // pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() + 1);
+                        // }
                     }
-                }
+                        if (beating(pawn, pawn.getWhere()) || board.getBlueFields().get(pawn.getWhere()).getPawn().getColor().equals("none")) {
+                            GridPane.setRowIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getRow());
+                            GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFields().get(pawn.getWhere()).getColumn());
+                            board.getBlueFields().get(pawn.getWhere()).setPawn(pawn);
+                            board.getBlueFields().get(releasedField).setPawn(new Pawn("none"));
+                            // pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() + 1);
+                        }
             } else {
                 finishing(pawn, whereNow, releasedField);
             }
@@ -252,7 +238,7 @@ public class GameController {
         return false;
     }
 
-    public void finishing(Pawn pawn, int whereNow, int releasedField) {
+    public void finishing (Pawn pawn, int whereNow, int releasedField) {
         boolean finish = true;
         System.out.println("whereNow: " + whereNow);
         if (pawn.getTraveledFields() + dice.getResult() +1 > 39 && whereNow > 3) {
@@ -280,17 +266,20 @@ public class GameController {
                 }
         break;
         case "Red":
-            if (pawn.getWhere() < board.getRedFinish().size() && board.getRedFinish().get(pawn.getWhere()).getPawn() == null) {
+            if (whereNow>3) {
+                pawn.setWhere(pawn.getTraveledFields()-40);
+            }
+            if (pawn.getWhere() < board.getRedFinish().size() && board.getRedFinish().get(pawn.getWhere()).getPawn().getColor().equals("none")) {
                 GridPane.setRowIndex(pawn.getPawn(), board.getRedFinish().get(pawn.getWhere()).getRow());
                 GridPane.setColumnIndex(pawn.getPawn(), board.getRedFinish().get(pawn.getWhere()).getColumn());
                 board.getRedFinish().get(pawn.getWhere()).setPawn(pawn);
                 if (!finish) {
                     board.getBlueFields().get(releasedField).setPawn(new Pawn("none"));
-                    pawn.setWhere(pawn.getWhere());
                 } else {
                     board.getRedFinish().get(releasedField).setPawn(null);
-                    pawn.setWhere(pawn.getWhere());
                 }
+            } else {
+                pawn.setTraveledFields(pawn.getTraveledFields() - (dice.getResult() + 1));
             }
         break;
         case "Green":
@@ -325,7 +314,7 @@ public class GameController {
 }
 
 
-    }
+}
 
 /*
      if (pawn.getWhere() >= pawn.getBlueFields().size()) {  //when go to base

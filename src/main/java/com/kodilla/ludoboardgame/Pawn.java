@@ -38,7 +38,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-            startField = where;
+            this.startField = where;
             this.traveledFields = traveledFields;
 
             //  this.dice = dice;
@@ -59,7 +59,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-            startField = where;
+            this.startField = where;
             this.traveledFields = traveledFields;
         } else if (color.equals("Green")) {
             pawn.setGraphic(new ImageView(pawnGreen));
@@ -70,7 +70,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-            startField = where;
+            this.startField = where;
             this.traveledFields = traveledFields;
         } else if (color.equals("Yellow")) {
             pawn.setGraphic(new ImageView(pawnYellow));
@@ -81,7 +81,7 @@ public class Pawn {
             this.color = color;
             this.homeColumn = homeColumn;
             this.homeRow = homeRow;
-            startField = where;
+            this.startField = where;
             this.traveledFields = traveledFields;
         }
     }

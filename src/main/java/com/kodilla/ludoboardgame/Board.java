@@ -65,10 +65,10 @@ public class Board {
         bluePlayer.add(blue4);
 
 
-        blueFinish.put(0, new BoardField(5,6, null));
-        blueFinish.put(1, new BoardField(5,7, null));
-        blueFinish.put(2, new BoardField(5,8, null));
-        blueFinish.put(3, new BoardField(5,9, null));
+        blueFinish.put(0, new BoardField(5,6, new Pawn ("none")));
+        blueFinish.put(1, new BoardField(5,7, new Pawn ("none")));
+        blueFinish.put(2, new BoardField(5,8, new Pawn ("none")));
+        blueFinish.put(3, new BoardField(5,9, new Pawn ("none")));
     }
 
     public void red () {
@@ -85,10 +85,10 @@ public class Board {
         redPlayer.add(red3);
         redPlayer.add(red4);
 
-        redFinish.put(0, new BoardField(1,10, null));
-        redFinish.put(1, new BoardField(2,10, null));
-        redFinish.put(2, new BoardField(3,10, null));
-        redFinish.put(3, new BoardField(4,10, null));
+        redFinish.put(0, new BoardField(1,10, new Pawn ("none")));
+        redFinish.put(1, new BoardField(2,10, new Pawn ("none")));
+        redFinish.put(2, new BoardField(3,10, new Pawn ("none")));
+        redFinish.put(3, new BoardField(4,10, new Pawn ("none")));
     }
     public void green () {
         Pawn green1 = new Pawn("Green", true, 20, 14, 9,0);
@@ -104,10 +104,10 @@ public class Board {
         greenPlayer.add(green3);
         greenPlayer.add(green4);
 
-        greenFinish.put(0, new BoardField(5,14, null));
-        greenFinish.put(1, new BoardField(5,13, null));
-        greenFinish.put(2, new BoardField(5,12, null));
-        greenFinish.put(3, new BoardField(5,11, null));
+        greenFinish.put(0, new BoardField(5,14, new Pawn ("none")));
+        greenFinish.put(1, new BoardField(5,13, new Pawn ("none")));
+        greenFinish.put(2, new BoardField(5,12, new Pawn ("none")));
+        greenFinish.put(3, new BoardField(5,11, new Pawn ("none")));
     }
     public void yellow () {
         Pawn yellow1 = new Pawn("Yellow", true, 30, 5, 9, 0);
@@ -123,10 +123,10 @@ public class Board {
         yellowPlayer.add(yellow3);
         yellowPlayer.add(yellow4);
 
-        yellowFinish.put(0, new BoardField(1,9, null));
-        yellowFinish.put(1, new BoardField(2,8, null));
-        yellowFinish.put(2, new BoardField(3,7, null));
-        yellowFinish.put(3, new BoardField(4,6, null));
+        yellowFinish.put(0, new BoardField(1,9, new Pawn ("none")));
+        yellowFinish.put(1, new BoardField(2,8, new Pawn ("none")));
+        yellowFinish.put(2, new BoardField(3,7, new Pawn ("none")));
+        yellowFinish.put(3, new BoardField(4,6, new Pawn ("none")));
     }
 
     public void createBlueFields() {

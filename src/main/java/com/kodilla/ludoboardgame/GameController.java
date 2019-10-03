@@ -31,7 +31,8 @@ public class GameController {
             int finalI = i;
             board.getBluePlayer().get(i).getPawn().setOnAction(event -> {
                 if (dice.getDiceIsThrow()) {
-                    int whereNow = board.getBluePlayer().get(finalI).getWhere() + dice.getResult() + 1;
+                    System.out.println("dice in setPlayer: " + (dice.getResult()+1));
+                    int whereNow = board.getBluePlayer().get(finalI).getTraveledFields() + dice.getResult() + 1;
                     if (whereNow<40) { //there is something wrong...
                         if (board.getBlueFields().get(board.getBluePlayer().get(finalI).getWhere() + dice.getResult() + 1).getPawn().getColor().equals("Blue")
                                 || (board.getBluePlayer().get(finalI).getIsHome() && dice.getResult() < 5)) {
@@ -39,15 +40,16 @@ public class GameController {
                         } else {
                             move(board.getBluePlayer().get(finalI));
                             dice.setDiceIsThrow(false);
-                            play();
+                          //  play();
                         }
-                    } else if (whereNow < board.getBlueFinish().size()){
-                        if (board.getBlueFinish().get(board.getBluePlayer().get(finalI).getWhere() + dice.getResult() + 1).getPawn().getColor().equals("Blue")) {
+                    } else if (whereNow <= 44){
+                        whereNow = whereNow - 40;
+                        if (board.getBlueFinish().get(whereNow).getPawn().getColor().equals("Blue")) {
                             board.getBluePlayer().get(finalI).getPawn().setDisable(true);
                         } else {
                             move(board.getBluePlayer().get(finalI));
                             dice.setDiceIsThrow(false);
-                            play();
+                           // play();
                         }
 
                     } else {
@@ -151,11 +153,11 @@ public class GameController {
         if (!wasMove) {
             for (Pawn pawn : board.getYellowPlayer()
             ) {
-                if (pawn.getTraveledFields() < 40) {
+                if (pawn.getTraveledFields() + dice.getResult() < 40) {
                     move(pawn);
                     break;
                 }
-                if (pawn.getTraveledFields() > 39 && pawn.getTraveledFields() < 43) {
+                if (pawn.getTraveledFields() + dice.getResult() > 39 && pawn.getTraveledFields() + dice.getResult() < 43) {
                     int rest = pawn.getTraveledFields() - 40;
                     if (dice.getResult() + 1 < board.getYellowFinish().size()) {
 
@@ -207,10 +209,12 @@ public class GameController {
             int whereNow = pawn.getWhere() + dice.getResult() + 1;
             int releasedField = pawn.getWhere();
             pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() +1);
-            if (whereNow >= board.getBlueFields().size()) {
-                pawn.setWhere(pawn.getWhere() - board.getBlueFields().size());
+            if (whereNow >= (board.getBlueFields().size())) {
+                pawn.setWhere(whereNow - (board.getBlueFields().size()));
+              //  whereNow = pawn.getWhere();
             }
             if (pawn.getTraveledFields() <= 39) {
+                System.out.println("whereNow in move: " + whereNow);
                 if (!board.getBlueFields().get(whereNow).getPawn().getColor().equals(pawn.getColor())) {
                     pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
                    // pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() + 1);
@@ -233,6 +237,7 @@ public class GameController {
                 finishing(pawn, whereNow, releasedField);
             }
         }
+        System.out.println("getWhere: " + pawn.getWhere());
     }
 
     public boolean beating(Pawn pawn, int where) {
@@ -249,25 +254,29 @@ public class GameController {
 
     public void finishing(Pawn pawn, int whereNow, int releasedField) {
         boolean finish = true;
-        if (whereNow > 39) {
-            pawn.setWhere(whereNow - 40);
+        System.out.println("whereNow: " + whereNow);
+        if (pawn.getTraveledFields() + dice.getResult() +1 > 39 && whereNow > 3) {
             finish = false;
-        } else if (pawn.getWhere() + dice.getResult() +1 < board.getBlueFinish().size() && board.getBlueFinish().get(pawn.getWhere()).getPawn() == null){
+        } else if (pawn.getWhere() + dice.getResult() +1 < board.getBlueFinish().size() && board.getBlueFinish().get(whereNow).getPawn().getColor().equals("none")){
             pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
         }
         System.out.println(pawn.getWhere());
         System.out.println(pawn.getTraveledFields());
+        System.out.println(finish);
         switch (pawn.getColor()) {
             case "Blue":
-                if (pawn.getWhere() < board.getBlueFinish().size() && board.getBlueFinish().get(pawn.getWhere()).getPawn() == null) {
+                if (pawn.getWhere() < board.getBlueFinish().size() && board.getBlueFinish().get(pawn.getWhere()).getPawn().getColor().equals("none")) {
                     GridPane.setRowIndex(pawn.getPawn(), board.getBlueFinish().get(pawn.getWhere()).getRow());
                     GridPane.setColumnIndex(pawn.getPawn(), board.getBlueFinish().get(pawn.getWhere()).getColumn());
                     board.getBlueFinish().get(pawn.getWhere()).setPawn(pawn);
+                    //pawn.setTraveledFields(pawn.getTraveledFields() + dice.getResult() +1);
                     if (!finish) {
                         board.getBlueFields().get(releasedField).setPawn(new Pawn("none"));
                     } else {
-                        board.getBlueFinish().get(releasedField).setPawn(null);
+                        board.getBlueFinish().get(releasedField).setPawn(new Pawn("none"));
                     }
+                } else {
+                    pawn.setTraveledFields(pawn.getTraveledFields() - (dice.getResult() +1));
                 }
         break;
         case "Red":

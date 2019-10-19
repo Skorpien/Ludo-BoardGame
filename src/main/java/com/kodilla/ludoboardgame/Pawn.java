@@ -21,6 +21,7 @@ public class Pawn {
     private GridPane gridPane = new GridPane();
     private int where;
     private boolean isHome;
+    private boolean isFinishing;
     private String color;
     private int homeColumn;
     private int homeRow;
@@ -29,20 +30,21 @@ public class Pawn {
 
 
     public Pawn (String color, boolean isHome, int where, int homeColumn, int homeRow, int traveledFields) {
-        if (color.equals("Blue")) {
-            pawn.setGraphic(new ImageView(pawnBlue));
-            pawn.setBorder(Border.EMPTY);
-            pawn.setStyle("-fx-background-color: transparent");
-            this.isHome = isHome;
-            this.where = where;
-            this.color = color;
-            this.homeColumn = homeColumn;
-            this.homeRow = homeRow;
-            this.startField = where;
-            this.traveledFields = traveledFields;
+        switch (color) {
+            case "Blue":
+                pawn.setGraphic(new ImageView(pawnBlue));
+                pawn.setBorder(Border.EMPTY);
+                pawn.setStyle("-fx-background-color: transparent");
+                this.isHome = isHome;
+                this.where = where;
+                this.color = color;
+                this.homeColumn = homeColumn;
+                this.homeRow = homeRow;
+                this.startField = where;
+                this.traveledFields = traveledFields;
 
-            //  this.dice = dice;
-            // this.board = board;
+                //  this.dice = dice;
+                // this.board = board;
     /*       pawn.setOnAction(event -> {
                if (dice.getDiceIsThrow()) {
                    move();
@@ -50,39 +52,46 @@ public class Pawn {
                    board.compMoveBoard();
                }
            });*/
-        } else if (color.equals("Red")) {
-            pawn.setGraphic(new ImageView(pawnRed));
-            pawn.setBorder(Border.EMPTY);
-            pawn.setStyle("-fx-background-color: transparent");
-            this.isHome = isHome;
-            this.where = where;
-            this.color = color;
-            this.homeColumn = homeColumn;
-            this.homeRow = homeRow;
-            this.startField = where;
-            this.traveledFields = traveledFields;
-        } else if (color.equals("Green")) {
-            pawn.setGraphic(new ImageView(pawnGreen));
-            pawn.setBorder(Border.EMPTY);
-            pawn.setStyle("-fx-background-color: transparent");
-            this.isHome = isHome;
-            this.where = where;
-            this.color = color;
-            this.homeColumn = homeColumn;
-            this.homeRow = homeRow;
-            this.startField = where;
-            this.traveledFields = traveledFields;
-        } else if (color.equals("Yellow")) {
-            pawn.setGraphic(new ImageView(pawnYellow));
-            pawn.setBorder(Border.EMPTY);
-            pawn.setStyle("-fx-background-color: transparent");
-            this.isHome = isHome;
-            this.where = where;
-            this.color = color;
-            this.homeColumn = homeColumn;
-            this.homeRow = homeRow;
-            this.startField = where;
-            this.traveledFields = traveledFields;
+                break;
+            case "Red":
+                pawn.setGraphic(new ImageView(pawnRed));
+                pawn.setBorder(Border.EMPTY);
+                pawn.setStyle("-fx-background-color: transparent");
+                this.isHome = isHome;
+                this.where = where;
+                this.color = color;
+                this.homeColumn = homeColumn;
+                this.homeRow = homeRow;
+                this.startField = where;
+                this.traveledFields = traveledFields;
+                isFinishing = false;
+                break;
+            case "Green":
+                pawn.setGraphic(new ImageView(pawnGreen));
+                pawn.setBorder(Border.EMPTY);
+                pawn.setStyle("-fx-background-color: transparent");
+                this.isHome = isHome;
+                this.where = where;
+                this.color = color;
+                this.homeColumn = homeColumn;
+                this.homeRow = homeRow;
+                this.startField = where;
+                this.traveledFields = traveledFields;
+                isFinishing = false;
+                break;
+            case "Yellow":
+                pawn.setGraphic(new ImageView(pawnYellow));
+                pawn.setBorder(Border.EMPTY);
+                pawn.setStyle("-fx-background-color: transparent");
+                this.isHome = isHome;
+                this.where = where;
+                this.color = color;
+                this.homeColumn = homeColumn;
+                this.homeRow = homeRow;
+                this.startField = where;
+                this.traveledFields = traveledFields;
+                isFinishing = false;
+                break;
         }
     }
 
@@ -137,5 +146,13 @@ public class Pawn {
 
     public void setHome(boolean home) {
         this.isHome = home;
+    }
+
+    public boolean getIsFinishing() {
+        return isFinishing;
+    }
+
+    public void setFinishing(boolean finishing) {
+        isFinishing = finishing;
     }
 }

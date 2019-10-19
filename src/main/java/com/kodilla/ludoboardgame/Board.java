@@ -123,10 +123,10 @@ public class Board {
         yellowPlayer.add(yellow3);
         yellowPlayer.add(yellow4);
 
-        yellowFinish.put(0, new BoardField(1,9, new Pawn ("none")));
-        yellowFinish.put(1, new BoardField(2,8, new Pawn ("none")));
-        yellowFinish.put(2, new BoardField(3,7, new Pawn ("none")));
-        yellowFinish.put(3, new BoardField(4,6, new Pawn ("none")));
+        yellowFinish.put(0, new BoardField(9,10, new Pawn ("none")));
+        yellowFinish.put(1, new BoardField(8,10, new Pawn ("none")));
+        yellowFinish.put(2, new BoardField(7,10, new Pawn ("none")));
+        yellowFinish.put(3, new BoardField(6,10, new Pawn ("none")));
     }
 
     public void createBlueFields() {

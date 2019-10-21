@@ -3,12 +3,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
-import javafx.scene.layout.GridPane;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class Pawn {
@@ -18,7 +13,6 @@ public class Pawn {
     private Image pawnGreen = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnGreen.png", 50, 50, true, false);
     private Image pawnYellow = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnYellow.png", 50, 50, true, false);
     private Button pawn = new Button();
-    private GridPane gridPane = new GridPane();
     private int where;
     private boolean isHome;
     private boolean isFinishing;
@@ -42,16 +36,6 @@ public class Pawn {
                 this.homeRow = homeRow;
                 this.startField = where;
                 this.traveledFields = traveledFields;
-
-                //  this.dice = dice;
-                // this.board = board;
-    /*       pawn.setOnAction(event -> {
-               if (dice.getDiceIsThrow()) {
-                   move();
-                   dice.setDiceIsThrow(false);
-                   board.compMoveBoard();
-               }
-           });*/
                 break;
             case "Red":
                 pawn.setGraphic(new ImageView(pawnRed));

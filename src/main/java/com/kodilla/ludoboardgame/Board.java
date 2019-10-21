@@ -1,6 +1,8 @@
 package com.kodilla.ludoboardgame;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -11,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Board {
-    //private  static List<BoardField> blueFields = new ArrayList<>(44);
     private List<Pawn> bluePlayer = new ArrayList<>();
     private List<Pawn> redPlayer = new ArrayList<>();
     private List<Pawn> greenPlayer = new ArrayList<>();
@@ -26,11 +27,12 @@ public class Board {
     private Map<Integer, BoardField> redFinish = new HashMap<Integer, BoardField>();
     private Map<Integer, BoardField> greenFinish = new HashMap<Integer, BoardField>();
     private Map<Integer, BoardField> yellowFinish = new HashMap<Integer, BoardField>();
+    private List<Pawn> allPawns = new ArrayList<>();
 
 
     public void setBoard () {
 
-        gridPane.setPadding(new Insets(37, 10, 20, 13));
+        gridPane.setPadding(new Insets(37, 10, 38, 16));
         gridPane.setHgap(75.0);
         gridPane.setVgap(75.0);
         gridPane.setBackground(background);
@@ -43,10 +45,10 @@ public class Board {
         gridPane.add(first, 0,0,2,2);
         gridPane.add(last,20,10,2,2);
         createBlueFields();
-       blue();
+/*       blue();
        red();
        green();
-       yellow();
+       yellow();*/
     }
 
 
@@ -55,6 +57,10 @@ public class Board {
         Pawn blue2 = new Pawn("Blue", true, 0, 5, 1, 0);
         Pawn blue3 = new Pawn("Blue", true, 0, 6, 0, 0);
         Pawn blue4 = new Pawn("Blue", true, 0, 6, 1, 0);
+        allPawns.add(blue1);
+        allPawns.add(blue2);
+        allPawns.add(blue3);
+        allPawns.add(blue4);
         gridPane.add(blue1.getPawn(), 5, 0, 2, 2);
         gridPane.add(blue2.getPawn(), 5, 1, 2, 2);
         gridPane.add(blue3.getPawn(), 6, 0, 2, 2);
@@ -170,25 +176,14 @@ public class Board {
         blueFields.add(new BoardField(6,6, new Pawn("none")));
         blueFields.add(new BoardField(6,5, new Pawn("none")));
         blueFields.add(new BoardField(5,5,new Pawn("none")));
-     /*   blueFields.add(new BoardField(5,6));
-        blueFields.add(new BoardField(5,7));
-        blueFields.add(new BoardField(5,8));
-        blueFields.add(new BoardField(5,9));*/
-
     }
 
 
-   /* public void compMoveBoard () {
-        redPlayer.get(0).compMove();
-    }*/
 
     public GridPane getGridPane() {
         return gridPane;
     }
 
-/*    public  static List<BoardField> getBlueFields() {
-        return blueFields;
-    }*/
 
     public List<Pawn> getBluePlayer() {
         return bluePlayer;
@@ -220,5 +215,10 @@ public class Board {
 
     public Map<Integer, BoardField> getYellowFinish() {
         return yellowFinish;
+    }
+
+
+    public List<Pawn> getAllPawns() {
+        return allPawns;
     }
 }

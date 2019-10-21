@@ -75,6 +75,22 @@ public class Dice {
         return dice;
     }
 
+   /* public void isHomeCheck () {
+        if (dice.getResult()<5) {
+            boolean allIsHome = true;
+            for (Pawn pawn : board.getBluePlayer()
+            ) {
+                if (!pawn.getIsHome()) {
+                    allIsHome = false;
+                    break;
+                }
+            }
+            if (allIsHome) {
+                play();
+            }
+        }
+    }*/
+
     public int getResult() {
         return result;
     }

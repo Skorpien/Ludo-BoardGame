@@ -26,8 +26,8 @@ public class VictoryCheck {
 
     public void redVictoryCheck () {
         boolean isRedVictory = true;
-        for (int i = 0; i<board.getBlueFinish().size(); i++) {
-            if (!board.getBlueFinish().get(i).getPawn().getColor().equals("Blue")) {
+        for (int i = 0; i<board.getRedFinish().size(); i++) {
+            if (!board.getRedFinish().get(i).getPawn().getColor().equals("Red")) {
                 isRedVictory = false;
                 break;
             }
@@ -40,8 +40,8 @@ public class VictoryCheck {
 
     public void greenVictoryCheck () {
         boolean isGreenVictory = true;
-        for (int i = 0; i<board.getBlueFinish().size(); i++) {
-            if (!board.getBlueFinish().get(i).getPawn().getColor().equals("Blue")) {
+        for (int i = 0; i<board.getGreenFinish().size(); i++) {
+            if (!board.getGreenFinish().get(i).getPawn().getColor().equals("Green")) {
                 isGreenVictory = false;
                 break;
             }
@@ -54,14 +54,14 @@ public class VictoryCheck {
 
     public void yellowVictoryCheck () {
         boolean isYellowVictory = true;
-        for (int i = 0; i<board.getBlueFinish().size(); i++) {
-            if (!board.getBlueFinish().get(i).getPawn().getColor().equals("Blue")) {
+        for (int i = 0; i<board.getYellowFinish().size(); i++) {
+            if (!board.getYellowFinish().get(i).getPawn().getColor().equals("Yellow")) {
                 isYellowVictory = false;
                 break;
             }
         }
         if (isYellowVictory) {
-            Label blueWin = new Label("GREEN WIN...");
+            Label blueWin = new Label("YELLOW WIN...");
             board.getGridPane().add(blueWin, 10, 5,2,2);
         }
     }

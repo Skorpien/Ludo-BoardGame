@@ -13,24 +13,38 @@ import javafx.stage.Stage;
 public class Ludo extends Application {
 
     private Image dice6 = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\dice_6-512.png", 40,40,true, false);
+    private Board board;
+    private Dice dice;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void restart (int players) {
+        Stage stage = new Stage();
+        start(stage);
 
-        Board board = new Board();
+        if (players == 2) {
+            board.blue();
+            board.red();
+            GameController gameController = new GameController(board, dice);
+            gameController.setPlayer();
+        }
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+
+        board = new Board();
         board.setBoard();
 
 
-        Dice dice = new Dice();
+        dice = new Dice();
         Button button = new Button();
         button.setGraphic(new ImageView(dice6));
         button.setOnAction(event -> button.setGraphic(new ImageView(dice.diceThrow())));
 
-        MenuButton menuButton = new MenuButton(board, dice);
+        MenuButton menuButton = new MenuButton(board, dice, primaryStage);
 
 
         VBox group = new VBox(menuButton.menuBar());

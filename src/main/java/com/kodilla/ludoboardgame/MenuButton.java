@@ -1,8 +1,10 @@
 package com.kodilla.ludoboardgame;
 
+import javafx.application.Platform;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 
 public class MenuButton {
@@ -10,11 +12,13 @@ public class MenuButton {
     MenuBar menuBar = new MenuBar();
     Board board;
     Dice dice;
+    Stage primaryStage;
 
 
-    public MenuButton (Board board, Dice dice) {
+    public MenuButton (Board board, Dice dice, Stage primaryStage) {
         this.board = board;
         this.dice = dice;
+        this.primaryStage = primaryStage;
     }
 
     public MenuBar menuBar () {
@@ -23,10 +27,9 @@ public class MenuButton {
         Menu newGame = new Menu("New Game");
         MenuItem twoPlayers = new MenuItem("2 players");
         twoPlayers.setOnAction(event -> {
-            board.blue();
-            board.red();
-            GameController gameController = new GameController(board, dice);
-            gameController.setPlayer();
+            primaryStage.close();
+            Platform.runLater( () -> new Ludo().restart(2) );
+
         });
         MenuItem threePlayers = new MenuItem("3 players");
         threePlayers.setOnAction(event -> {

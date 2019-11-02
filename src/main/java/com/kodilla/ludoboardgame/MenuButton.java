@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 
 public class MenuButton {
 
-    MenuBar menuBar = new MenuBar();
-    Board board;
-    Dice dice;
-    Stage primaryStage;
+    private MenuBar menuBar = new MenuBar();
+    private Board board;
+    private Dice dice;
+    private Stage primaryStage;
 
 
     public MenuButton (Board board, Dice dice, Stage primaryStage) {
@@ -33,20 +33,13 @@ public class MenuButton {
         });
         MenuItem threePlayers = new MenuItem("3 players");
         threePlayers.setOnAction(event -> {
-            board.blue();
-            board.red();
-            board.green();
-            GameController gameController = new GameController(board, dice);
-            gameController.setPlayer();
+            primaryStage.close();
+            Platform.runLater( () -> new Ludo().restart(3) );
         });
         MenuItem fourPlayers = new MenuItem("4 players");
         fourPlayers.setOnAction(event -> {
-            board.blue();
-            board.red();
-            board.green();
-            board.yellow();
-            GameController gameController = new GameController(board, dice);
-            gameController.setPlayer();
+            primaryStage.close();
+            Platform.runLater( () -> new Ludo().restart(4) );
         });
         MenuItem saveGame = new MenuItem("Save Game");
         MenuItem loadGame = new MenuItem("Load Game");

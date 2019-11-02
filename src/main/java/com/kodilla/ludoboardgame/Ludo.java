@@ -24,11 +24,31 @@ public class Ludo extends Application {
         Stage stage = new Stage();
         start(stage);
 
-        if (players == 2) {
-            board.blue();
-            board.red();
-            GameController gameController = new GameController(board, dice);
-            gameController.setPlayer();
+        switch (players) {
+            case 2: {
+                board.blue();
+                board.red();
+                GameController gameController = new GameController(board, dice, 2);
+                gameController.setPlayer();
+                break;
+            }
+            case 3: {
+                board.blue();
+                board.red();
+                board.green();
+                GameController gameController = new GameController(board, dice, 3);
+                gameController.setPlayer();
+                break;
+            }
+            case 4: {
+                board.blue();
+                board.red();
+                board.green();
+                board.yellow();
+                GameController gameController = new GameController(board, dice, 4);
+                gameController.setPlayer();
+                break;
+            }
         }
     }
 
@@ -42,7 +62,11 @@ public class Ludo extends Application {
         dice = new Dice();
         Button button = new Button();
         button.setGraphic(new ImageView(dice6));
-        button.setOnAction(event -> button.setGraphic(new ImageView(dice.diceThrow())));
+        button.setOnAction(event -> {
+            button.setGraphic(new ImageView(dice.diceThrow()));
+            GameController gameController = new GameController(board, dice);
+            gameController.isHomeCheck();
+        });
 
         MenuButton menuButton = new MenuButton(board, dice, primaryStage);
 

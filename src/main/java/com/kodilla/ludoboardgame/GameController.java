@@ -7,58 +7,55 @@ public class GameController {
 
     private Board board;
     private Dice dice;
+    private int players;
 
-    public GameController(Board board, Dice dice) {
+    public GameController(Board board, Dice dice, int players) {
+        this.board = board;
+        this.dice = dice;
+        this.players = players;
+    }
+
+    public GameController (Board board, Dice dice) {
         this.board = board;
         this.dice = dice;
     }
 
-
     public void setPlayer() {
         for (int i = 0; i < board.getBluePlayer().size(); i++) {
             int finalI = i;
-            board.getBluePlayer().get(i).getPawn().setOnAction(event -> {
-                if (dice.getDiceIsThrow()) {
-                    System.out.println("dice in setPlayer: " + (dice.getResult()+1));
-                    int whereNow = board.getBluePlayer().get(finalI).getTraveledFields() + dice.getResult() + 1;
-                    if (whereNow<40) {
-                        if ((board.getBlueFields().get(whereNow).getPawn().getColor().equals("Blue"))
-                                || (board.getBluePlayer().get(finalI).getIsHome() && dice.getResult() < 5) || (board.getBlueFields().get(0).getPawn().getColor().equals("Blue") && board.getBluePlayer().get(finalI).getIsHome())) {
-                            board.getBluePlayer().get(finalI).getPawn().setDisable(true);
-                        } else {
-                            move(board.getBluePlayer().get(finalI));
-                            dice.setDiceIsThrow(false);
-                           play();
-                        }
-                    } else if (whereNow <= 43){
-                        whereNow = whereNow - 40;
-                        if (board.getBlueFinish().get(whereNow).getPawn().getColor().equals("Blue")) {
-                            board.getBluePlayer().get(finalI).getPawn().setDisable(true);
-                        } else {
-                            move(board.getBluePlayer().get(finalI));
-                            dice.setDiceIsThrow(false);
-                           play();
-                        }
-
-                    } else {
-                        board.getBluePlayer().get(finalI).getPawn().setDisable(true);
-                    }
-                    boolean allDisable = true;
-                    for (Pawn pawn: board.getBluePlayer()
-                         ) {
-                        if(!pawn.getPawn().isDisable()) {
-                            allDisable = false;
-                            break;
-                        }
-                        if (allDisable) {
-                            play();
-                        }
-                    }
-                }
-            });
+            board.getBluePlayer().get(i).getPawn().setOnAction(event -> moveProcessor(finalI));
         }
     }
 
+    public void moveProcessor (int finalI) {
+        if (dice.getDiceIsThrow()) {
+            System.out.println("dice in setPlayer: " + (dice.getResult()+1));
+            int whereNow = board.getBluePlayer().get(finalI).getTraveledFields() + dice.getResult() + 1;
+            if (whereNow<40) {
+                if ((board.getBlueFields().get(whereNow).getPawn().getColor().equals("Blue"))
+                        || (board.getBluePlayer().get(finalI).getIsHome() && dice.getResult() < 5) || (board.getBlueFields().get(0).getPawn().getColor().equals("Blue") && board.getBluePlayer().get(finalI).getIsHome())) {
+                    board.getBluePlayer().get(finalI).getPawn().setDisable(true);
+                } else {
+                    move(board.getBluePlayer().get(finalI));
+                    dice.setDiceIsThrow(false);
+                    play();
+                }
+            } else if (whereNow <= 43){
+                whereNow = whereNow - 40;
+                if (board.getBlueFinish().get(whereNow).getPawn().getColor().equals("Blue")) {
+                    board.getBluePlayer().get(finalI).getPawn().setDisable(true);
+                } else {
+                    move(board.getBluePlayer().get(finalI));
+                    dice.setDiceIsThrow(false);
+                    play();
+                }
+
+            } else {
+                board.getBluePlayer().get(finalI).getPawn().setDisable(true);
+            }
+         //   homeCheck(dice.getResult());
+        }
+    }
 
     public void play() {
 
@@ -243,8 +240,12 @@ public class GameController {
         VictoryCheck victoryCheck = new VictoryCheck(board);
         victoryCheck.blueVictoryCheck();
         victoryCheck.redVictoryCheck();
-        victoryCheck.greenVictoryCheck();
-        victoryCheck.yellowVictoryCheck();
+        if (players > 2) {
+            victoryCheck.greenVictoryCheck();
+        }
+        if (players == 4) {
+            victoryCheck.yellowVictoryCheck();
+        }
     }
 
     public boolean beating(Pawn pawn, int where) {
@@ -353,5 +354,48 @@ public class GameController {
             return whereNow = whereNow - board.getBlueFields().size();
     }
 
+   /* public void homeCheck (int result) {
+        boolean allHome = true;
+        if (result != 5) {
+            for (Pawn pawn:
+                 board.getBluePlayer()) {
+                if (!pawn.getIsHome()) {
+                    allHome = false;
+                    break;
+                }
+            }
+        }
+        if (allHome) {
+            for (Pawn pawn:
+                 board.getBluePlayer()) {
+                pawn.getPawn().setDisable(true);
+            }
+            play();
+        }
+    }*/
+
+    public void isHomeCheck () {
+        if (dice.getResult()<5) {
+            int howMany = 0;
+            for (Pawn pawn :
+                    board.getBluePlayer()) {
+                if (!pawn.getIsHome()) {
+                    howMany += possibleMoveCheck(pawn);
+                    System.out.println("howMany in isHomeCheck" + howMany);
+                }
+            }
+            if (howMany == 0) {
+                play();
+            }
+        }
+    }
+
+    public int possibleMoveCheck (Pawn pawn) {
+        int where = dice.getResult() + 1 + pawn.getTraveledFields();
+        if (where >= 43) {
+            return 0;
+        }
+        return 1;
+    }
 }
 

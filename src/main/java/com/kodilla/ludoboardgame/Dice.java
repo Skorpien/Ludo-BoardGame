@@ -18,34 +18,43 @@ public class Dice {
     private boolean isHome = true;
     private Image dice;
     private Button button = new Button();
+    private Board board;
 
     Random random = new Random();
+
 
     public Image diceThrow () {
         if(!diceIsThrow || isHome) {
         result = random.nextInt(6);
-                if (result == 0) {
+            switch (result) {
+                case 0:
                     diceIsThrow = true;
                     dice = dice1;
-                } else if (result == 1) {
+                    break;
+                case 1:
                     diceIsThrow = true;
                     dice = dice2;
-                } else if (result == 2) {
+                    break;
+                case 2:
                     diceIsThrow = true;
                     dice = dice3;
-                } else if (result == 3) {
+                    break;
+                case 3:
                     diceIsThrow = true;
                     dice = dice4;
-                } else if (result == 4) {
+                    break;
+                case 4:
                     diceIsThrow = true;
                     dice = dice5;
-                } else if (result == 5) {
+                    break;
+                case 5:
                     diceIsThrow = true;
                     dice = dice6;
-                } else {
+                    break;
+                default:
                     System.out.println("BUG");
                     return null;
-                }
+            }
             }
         return dice;
         }
@@ -75,21 +84,6 @@ public class Dice {
         return dice;
     }
 
-   /* public void isHomeCheck () {
-        if (dice.getResult()<5) {
-            boolean allIsHome = true;
-            for (Pawn pawn : board.getBluePlayer()
-            ) {
-                if (!pawn.getIsHome()) {
-                    allIsHome = false;
-                    break;
-                }
-            }
-            if (allIsHome) {
-                play();
-            }
-        }
-    }*/
 
     public int getResult() {
         return result;

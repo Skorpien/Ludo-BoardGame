@@ -55,7 +55,7 @@ public class VictoryCheck {
     public void yellowVictoryCheck () {
         boolean isYellowVictory = true;
         for (int i = 0; i<board.getYellowFinish().size(); i++) {
-            if (!board.getYellowFinish().get(i).getPawn().getColor().equals("Yellow")) {
+            if (board.getYellowFinish().get(i).getPawn().getColor().equals("Yellow")) {
                 isYellowVictory = false;
                 break;
             }

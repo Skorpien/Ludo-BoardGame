@@ -4,9 +4,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 
+import java.io.Serializable;
 
 
-public class Pawn {
+public class Pawn implements Serializable {
 
     private Image pawnBlue = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawn.png", 50, 50, true, false);
     private Image pawnRed = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\pawnRed.png", 50, 50, true, false);
@@ -36,6 +37,7 @@ public class Pawn {
                 this.homeRow = homeRow;
                 this.startField = where;
                 this.traveledFields = traveledFields;
+                isFinishing = false;
                 break;
             case "Red":
                 pawn.setGraphic(new ImageView(pawnRed));
@@ -139,4 +141,5 @@ public class Pawn {
     public void setFinishing(boolean finishing) {
         isFinishing = finishing;
     }
+
 }

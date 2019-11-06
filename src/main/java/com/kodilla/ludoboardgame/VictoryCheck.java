@@ -4,7 +4,8 @@ package com.kodilla.ludoboardgame;
 import javafx.scene.control.Label;
 
 public class VictoryCheck {
-    Board board;
+    private Board board;
+    private Label winLabel;
 
     public VictoryCheck (Board board) {
         this.board = board;
@@ -19,8 +20,8 @@ public class VictoryCheck {
             }
         }
         if (isBlueVictory) {
-            Label blueWin = new Label("  YOU WIN!");
-            board.getGridPane().add(blueWin, 10, 5,2,2);
+            winLabel = new Label("  YOU WIN!");
+            board.getGridPane().add(winLabel, 10, 5,2,2);
         }
     }
 
@@ -33,8 +34,8 @@ public class VictoryCheck {
             }
         }
         if (isRedVictory) {
-            Label blueWin = new Label("RED WIN...");
-            board.getGridPane().add(blueWin, 10, 5,2,2);
+            winLabel = new Label("RED WIN...");
+            board.getGridPane().add(winLabel, 10, 5,2,2);
         }
     }
 
@@ -47,22 +48,26 @@ public class VictoryCheck {
             }
         }
         if (isGreenVictory) {
-            Label blueWin = new Label("GREEN WIN...");
-            board.getGridPane().add(blueWin, 10, 5,2,2);
+            winLabel = new Label("GREEN WIN...");
+            board.getGridPane().add(winLabel, 10, 5,2,2);
         }
     }
 
     public void yellowVictoryCheck () {
         boolean isYellowVictory = true;
         for (int i = 0; i<board.getYellowFinish().size(); i++) {
-            if (board.getYellowFinish().get(i).getPawn().getColor().equals("Yellow")) {
+            if (!board.getYellowFinish().get(i).getPawn().getColor().equals("Yellow")) {
                 isYellowVictory = false;
                 break;
             }
         }
         if (isYellowVictory) {
-            Label blueWin = new Label("YELLOW WIN...");
-            board.getGridPane().add(blueWin, 10, 5,2,2);
+            winLabel = new Label("YELLOW WIN...");
+            board.getGridPane().add(winLabel, 10, 5,2,2);
         }
+    }
+
+    public Label getWinLabel() {
+        return winLabel;
     }
 }

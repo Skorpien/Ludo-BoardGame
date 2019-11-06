@@ -13,12 +13,14 @@ public class MenuButton {
     private Board board;
     private Dice dice;
     private Stage primaryStage;
+    private SaveLoad saveLoad;
 
 
-    public MenuButton (Board board, Dice dice, Stage primaryStage) {
+    public MenuButton (Board board, Dice dice, Stage primaryStage, SaveLoad saveLoad) {
         this.board = board;
         this.dice = dice;
         this.primaryStage = primaryStage;
+        this.saveLoad = saveLoad;
     }
 
     public MenuBar menuBar () {
@@ -42,7 +44,27 @@ public class MenuButton {
             Platform.runLater( () -> new Ludo().restart(4) );
         });
         MenuItem saveGame = new MenuItem("Save Game");
+        saveGame.setOnAction(event -> saveLoad.save());
         MenuItem loadGame = new MenuItem("Load Game");
+        loadGame.setOnAction(event -> {
+           // primaryStage.close();
+           // Platform.runLater( () -> new Ludo().restart(board.getHowManyPlayers()) );
+            board.getBlueFields().clear();
+            board.getBlueFinish().clear();
+            board.getRedFinish().clear();
+            board.getGreenFinish().clear();
+            board.getYellowFinish().clear();
+            board.createBlueFinish();
+            board.createRedFinish();
+            board.createGreenFinish();
+            board.createYellowFinish();
+            board.createBlueFields();
+            for (Pawn pawn:
+                    board.getBluePlayer()) {
+                pawn.getPawn().setDisable(false);
+            }
+            saveLoad.load();
+        });
         MenuItem ranking = new MenuItem("Ranking");
         MenuItem exit = new MenuItem("Exit");
         exit.setOnAction(event -> {

@@ -7,12 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Board {
+public class Board implements Serializable {
     private List<Pawn> bluePlayer = new ArrayList<>();
     private List<Pawn> redPlayer = new ArrayList<>();
     private List<Pawn> greenPlayer = new ArrayList<>();
@@ -28,6 +29,7 @@ public class Board {
     private Map<Integer, BoardField> greenFinish = new HashMap<Integer, BoardField>();
     private Map<Integer, BoardField> yellowFinish = new HashMap<Integer, BoardField>();
     private List<Pawn> allPawns = new ArrayList<>();
+    private int howManyPlayers;
 
 
     public void setBoard () {
@@ -69,8 +71,10 @@ public class Board {
         bluePlayer.add(blue2);
         bluePlayer.add(blue3);
         bluePlayer.add(blue4);
+        createBlueFinish();
+    }
 
-
+    public void createBlueFinish () {
         blueFinish.put(0, new BoardField(5,6, new Pawn ("none")));
         blueFinish.put(1, new BoardField(5,7, new Pawn ("none")));
         blueFinish.put(2, new BoardField(5,8, new Pawn ("none")));
@@ -82,6 +86,10 @@ public class Board {
         Pawn red2 = new Pawn("Red", true, 10, 14, 1, 0);
         Pawn red3 = new Pawn("Red", true, 10, 15, 0, 0);
         Pawn red4 = new Pawn("Red", true, 10, 15, 1, 0);
+        allPawns.add(red1);
+        allPawns.add(red2);
+        allPawns.add(red3);
+        allPawns.add(red4);
         gridPane.add(red1.getPawn(), 14, 0, 2, 2);
         gridPane.add(red2.getPawn(), 14, 1, 2, 2);
         gridPane.add(red3.getPawn(), 15, 0, 2, 2);
@@ -90,17 +98,25 @@ public class Board {
         redPlayer.add(red2);
         redPlayer.add(red3);
         redPlayer.add(red4);
+        createRedFinish();
+    }
 
+    public void createRedFinish () {
         redFinish.put(0, new BoardField(1,10, new Pawn ("none")));
         redFinish.put(1, new BoardField(2,10, new Pawn ("none")));
         redFinish.put(2, new BoardField(3,10, new Pawn ("none")));
         redFinish.put(3, new BoardField(4,10, new Pawn ("none")));
     }
+
     public void green () {
         Pawn green1 = new Pawn("Green", true, 20, 14, 9,0);
         Pawn green2 = new Pawn("Green", true, 20, 14, 10, 0);
         Pawn green3 = new Pawn("Green", true, 20, 15, 9, 0);
         Pawn green4 = new Pawn("Green", true, 20, 15, 10, 0);
+        allPawns.add(green1);
+        allPawns.add(green2);
+        allPawns.add(green3);
+        allPawns.add(green4);
         gridPane.add(green1.getPawn(), 14, 9, 2, 2);
         gridPane.add(green2.getPawn(), 14, 10, 2, 2);
         gridPane.add(green3.getPawn(), 15, 9, 2, 2);
@@ -109,17 +125,25 @@ public class Board {
         greenPlayer.add(green2);
         greenPlayer.add(green3);
         greenPlayer.add(green4);
+        createGreenFinish();
+    }
 
+    public void createGreenFinish () {
         greenFinish.put(0, new BoardField(5,14, new Pawn ("none")));
         greenFinish.put(1, new BoardField(5,13, new Pawn ("none")));
         greenFinish.put(2, new BoardField(5,12, new Pawn ("none")));
         greenFinish.put(3, new BoardField(5,11, new Pawn ("none")));
     }
+
     public void yellow () {
         Pawn yellow1 = new Pawn("Yellow", true, 30, 5, 9, 0);
         Pawn yellow2 = new Pawn("Yellow", true, 30, 5, 10, 0);
         Pawn yellow3 = new Pawn("Yellow", true, 30, 6, 9, 0);
         Pawn yellow4 = new Pawn("Yellow", true, 30, 6, 10, 0);
+        allPawns.add(yellow1);
+        allPawns.add(yellow2);
+        allPawns.add(yellow3);
+        allPawns.add(yellow4);
         gridPane.add(yellow1.getPawn(), 5, 9, 2, 2);
         gridPane.add(yellow2.getPawn(), 5, 10, 2, 2);
         gridPane.add(yellow3.getPawn(), 6, 9, 2, 2);
@@ -128,7 +152,10 @@ public class Board {
         yellowPlayer.add(yellow2);
         yellowPlayer.add(yellow3);
         yellowPlayer.add(yellow4);
+        createYellowFinish();
+    }
 
+    public void createYellowFinish () {
         yellowFinish.put(0, new BoardField(9,10, new Pawn ("none")));
         yellowFinish.put(1, new BoardField(8,10, new Pawn ("none")));
         yellowFinish.put(2, new BoardField(7,10, new Pawn ("none")));
@@ -217,6 +244,13 @@ public class Board {
         return yellowFinish;
     }
 
+    public int getHowManyPlayers() {
+        return howManyPlayers;
+    }
+
+    public void setHowManyPlayers(int howManyPlayers) {
+        this.howManyPlayers = howManyPlayers;
+    }
 
     public List<Pawn> getAllPawns() {
         return allPawns;

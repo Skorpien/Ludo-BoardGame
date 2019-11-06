@@ -30,6 +30,7 @@ public class Ludo extends Application {
                 board.red();
                 GameController gameController = new GameController(board, dice, 2);
                 gameController.setPlayer();
+                board.setHowManyPlayers(2);
                 break;
             }
             case 3: {
@@ -38,6 +39,7 @@ public class Ludo extends Application {
                 board.green();
                 GameController gameController = new GameController(board, dice, 3);
                 gameController.setPlayer();
+                board.setHowManyPlayers(3);
                 break;
             }
             case 4: {
@@ -47,6 +49,7 @@ public class Ludo extends Application {
                 board.yellow();
                 GameController gameController = new GameController(board, dice, 4);
                 gameController.setPlayer();
+                board.setHowManyPlayers(4);
                 break;
             }
         }
@@ -55,9 +58,10 @@ public class Ludo extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+
         board = new Board();
         board.setBoard();
-
+        SaveLoad saveLoad = new SaveLoad(board);
 
         dice = new Dice();
         Button button = new Button();
@@ -68,7 +72,7 @@ public class Ludo extends Application {
             gameController.isHomeCheck();
         });
 
-        MenuButton menuButton = new MenuButton(board, dice, primaryStage);
+        MenuButton menuButton = new MenuButton(board, dice, primaryStage, saveLoad);
 
 
         VBox group = new VBox(menuButton.menuBar());

@@ -172,6 +172,7 @@ public class GameController {
     }
 
     public void move(Pawn pawn) {
+        System.out.println(pawn.getIsHome());
         if (pawn.getIsHome()) {
             if (dice.getResult() == 5 && !board.getBlueFields().get(pawn.getStartField()).getPawn().getColor().equals(pawn.getColor())) {
                 switch (pawn.getColor()) {
@@ -268,6 +269,7 @@ public class GameController {
                 if (pawn.getTraveledFields() + dice.getResult() +1 > 39 && whereNow > 3) {
                     pawn.setWhere(pawn.getTraveledFields()-40);
                     finish = false;
+                    pawn.setFinishing(true);
                 } else if (pawn.getWhere() + dice.getResult() +1 < board.getBlueFinish().size() && board.getBlueFinish().get(whereNow).getPawn().getColor().equals("none")){
                     pawn.setWhere(pawn.getWhere() + dice.getResult() + 1);
                 }
@@ -397,5 +399,6 @@ public class GameController {
         }
         return 1;
     }
+
 }
 

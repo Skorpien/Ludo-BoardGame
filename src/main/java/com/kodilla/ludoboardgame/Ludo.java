@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Ludo extends Application {
 
-    private Image dice6 = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\dice_6-512.png", 40,40,true, false);
+    private Image dice6 = new Image("dice_6-512.png",40,40,true, false);
     private Board board;
     private Dice dice;
 

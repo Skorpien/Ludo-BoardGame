@@ -19,7 +19,7 @@ public class Board implements Serializable {
     private List<Pawn> greenPlayer = new ArrayList<>();
     private List<Pawn> yellowPlayer = new ArrayList<>();
     private GridPane gridPane = new GridPane();
-    private Image image = new Image("file:E:\\JAVA\\IntelliJ IDEA 2019.2\\Projects\\kodilla-course\\ludo-boardgame\\src\\main\\resources\\ludo-board.jpg");
+    private Image image = new Image("ludo-board.jpg");
     private BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
     private BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
     private Background background = new Background(backgroundImage);
@@ -38,7 +38,7 @@ public class Board implements Serializable {
         gridPane.setHgap(75.0);
         gridPane.setVgap(75.0);
         gridPane.setBackground(background);
-        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(false);
         gridPane.setOnMouseClicked((event) -> {
             System.out.println(event.getX() + " " + event.getY());
         });
